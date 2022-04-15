@@ -53,26 +53,6 @@ class RecordIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         defResp = handler_input.response_builder
-        att = attributes_manager.AttributesManager.request_attributes()
-        """ resp = {
-  "event": {
-    "header": {
-      "namespace": "Alexa",
-      "name": "DeferredResponse",
-      "messageId": "a unique identifier, preferably a version 4 UUID",
-      "correlationToken": "<an opaque correlation token>",
-      "payloadVersion": "3"
-    },
-    "payload": {
-      "estimatedDeferralInSeconds": 16
-    }
-  }
-  } """
-        #resp["event"]["header"]["messageId"] = str(uuid.uuid4())
-        #resp["event"]["endpoint"]["endpointId"] = att["context"]["System"]["device"]["deviceiD"]
-        serializer = DefaultSerializer
-        #defResp.set_api_response(resp)
-        #requests.post(respUrl, json.dump(resp))
         defResp.set_should_end_session(False)
         return (defResp.speak("This is a test").response)
 class StopRecordIntentHandler(AbstractRequestHandler):
