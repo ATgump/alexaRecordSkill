@@ -52,7 +52,7 @@ class RecordIntentHandler(AbstractRequestHandler):
         
         att = attributes_manager.AttributesManager.request_attributes()
         sid = att["session"]["sessionId"]
-        respUrl = "https://api.amazonalexa.com/"+sid
+        respUrl = "https://api.amazonalexa.com/"
         resp = {
   "event": {
     "header": {
@@ -62,12 +62,16 @@ class RecordIntentHandler(AbstractRequestHandler):
       "correlationToken": "<an opaque correlation token>",
       "payloadVersion": "3"
     },
+    "endpoint": {
+        "endpointId": "endpoint ID"
+      },
     "payload": {
       "estimatedDeferralInSeconds": 16
     }
   }
 }
         resp["event"]["header"]["messageId"] = str(uuid.uuid4())
+        resp["event"]["endpoint"]["endpointId"] = att["context"]["System"]["device"]["deviceiD"]
         requests.post(respUrl, json.dump(resp))
         time.sleep(15)
         return (
