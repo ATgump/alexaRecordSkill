@@ -18,6 +18,7 @@ from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.dispatch_components import AbstractExceptionHandler
 from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_model.services.api_client_request import ApiClientRequest
+from ask_sdk_core import attributes_manager
 from ask_sdk_model import Response
 from ask_sdk_model.interfaces.audioplayer import AudioItem, Stream, PlayDirective, PlayBehavior
 from utils import create_presigned_url
@@ -49,8 +50,9 @@ class RecordIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         
-        
-        
+        att = attributes_manager.AttributesManager.request_attributes()
+        sid = att["session"]["sessionId"]
+        respUrl = "https://api.amazonalexa.com/"+sid
         resp = {
   "event": {
     "header": {
@@ -65,8 +67,8 @@ class RecordIntentHandler(AbstractRequestHandler):
     }
   }
 }
-        resp["event"]["header"]["messageId"] = uuid.uuid4()
-        #requests.post("URL HERE", json.dump(resp))
+        resp["event"]["header"]["messageId"] = str(uuid.uuid4())
+        requests.post(respUrl, json.dump(resp))
         time.sleep(15)
         return (
             handler_input.response_builder
