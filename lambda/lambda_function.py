@@ -52,9 +52,12 @@ class RecordIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        defResp = handler_input.response_builder
-        defResp.set_should_end_session(False)
-        return (defResp.speak("This is a test").response)
+        return (
+          handler_input.response_builder
+          .speak("This is a test")
+          .set_should_end_session(False)
+          .response
+          )
 class StopRecordIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("StopRecordIntent")(handler_input)
