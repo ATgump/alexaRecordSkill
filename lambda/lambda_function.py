@@ -74,7 +74,7 @@ class RecordIntentHandler(AbstractRequestHandler):
         #defResp.set_api_response(resp)
         #requests.post(respUrl, json.dump(resp))
         defResp.set_should_end_session(False)
-        return defResp.speak("This is a test").response
+        return (defResp.speak("This is a test").response)
 class StopRecordIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("StopRecordIntent")(handler_input)
