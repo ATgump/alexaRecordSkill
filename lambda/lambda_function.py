@@ -54,7 +54,7 @@ class RecordIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         defResp = handler_input.response_builder
         att = attributes_manager.AttributesManager.request_attributes()
-        resp = {
+        """ resp = {
   "event": {
     "header": {
       "namespace": "Alexa",
@@ -67,8 +67,8 @@ class RecordIntentHandler(AbstractRequestHandler):
       "estimatedDeferralInSeconds": 16
     }
   }
-}
-        resp["event"]["header"]["messageId"] = str(uuid.uuid4())
+  } """
+        #resp["event"]["header"]["messageId"] = str(uuid.uuid4())
         #resp["event"]["endpoint"]["endpointId"] = att["context"]["System"]["device"]["deviceiD"]
         serializer = DefaultSerializer
         #defResp.set_api_response(resp)
