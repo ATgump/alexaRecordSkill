@@ -71,7 +71,7 @@ class RecordIntentHandler(AbstractRequestHandler):
         resp["event"]["header"]["messageId"] = str(uuid.uuid4())
         #resp["event"]["endpoint"]["endpointId"] = att["context"]["System"]["device"]["deviceiD"]
         serializer = DefaultSerializer
-        defResp.set_api_response(resp)
+        #defResp.set_api_response(resp)
         #requests.post(respUrl, json.dump(resp))
         defResp.set_should_end_session(False)
         return defResp.speak("This is a test").response
