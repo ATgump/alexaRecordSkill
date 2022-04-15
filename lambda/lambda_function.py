@@ -53,7 +53,9 @@ class RecordIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         resp = handler_input.response_builder
+        apiObj = "This is a test"
         resp.speak("This is a test")
+        resp.set_api_response(apiObj)
         return (
           resp
           .set_should_end_session(False)
