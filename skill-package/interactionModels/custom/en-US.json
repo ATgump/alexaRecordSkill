@@ -1,0 +1,33 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "microphone",
+      "intents": [
+        {
+          "name": "RecordIntent",
+          "slots": [],
+          "samples": [
+            "initiate microphone"
+          ]
+        },
+        {
+          "name": "StopRecordIntent",
+          "slots": [],
+          "samples": [
+            "terminate microphone"
+          ]
+        },        
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        }
+      ],
+      "types": []
+    }
+  },
+  "version": "2"
+}
