@@ -4,12 +4,15 @@
 # Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
 # session persistence, api calls, and more.
 # This sample is built using the handler classes approach in skill builder.
+from email import header
 from email.mime import audio
 from http.client import ResponseNotReady, responses
 import logging
 import ask_sdk_core.utils as ask_utils
 import re
-
+import uuid
+import json
+import requests
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.dispatch_components import AbstractExceptionHandler
@@ -45,16 +48,29 @@ class RecordIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("RecordIntent")(handler_input)
 
     def handle(self, handler_input):
-        # type: (HandlerInput) -> Response
-        #speak_output =  "Record"
-        audio_url = create_presigned_url("Media/testSmallSilence.mp3")
-        audio_url= re.sub('&','&amp;',audio_url)
-        reprompt_output = "<audio src=\""+audio_url+"\"/>"
+        
+        
+        
+        resp = {
+  "event": {
+    "header": {
+      "namespace": "Alexa",
+      "name": "DeferredResponse",
+      "messageId": "a unique identifier, preferably a version 4 UUID",
+      "correlationToken": "<an opaque correlation token>",
+      "payloadVersion": "3"
+    },
+    "payload": {
+      "estimatedDeferralInSeconds": 16
+    }
+  }
+}
+        resp["event"]["header"]["messageId"] = uuid.uuid4()
+        #requests.post("URL HERE", json.dump(resp))
+        time.sleep(15)
         return (
             handler_input.response_builder
-                .speak(reprompt_output)
-                .set_should_end_session(False)
-                .ask("")
+                .set_should_end_session(True)
                 # .ask("add a reprompt if you want to keep the session open for the user to respond")
                 .response
         )
