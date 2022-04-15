@@ -51,6 +51,7 @@ class RecordIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("RecordIntent")(handler_input)
 
     def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
         defResp = handler_input.response_builder
         att = attributes_manager.AttributesManager.request_attributes()
         resp = {
@@ -75,6 +76,7 @@ class RecordIntentHandler(AbstractRequestHandler):
         serializer = DefaultSerializer
         defResp.set_api_response(serializer.serialize(resp))
         defResp.response
+        print(defResp)
         #requests.post(respUrl, json.dump(resp))
         time.sleep(15)
         return (
