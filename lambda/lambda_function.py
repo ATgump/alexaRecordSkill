@@ -13,6 +13,7 @@ import re
 import uuid
 import json
 import requests
+from ask_sdk_model_runtime.api_client_response import ApiClientResponse
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.dispatch_components import AbstractExceptionHandler
@@ -53,7 +54,21 @@ class RecordIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         resp = handler_input.response_builder
-        apiObj = "This is a test"
+        bod = 	{
+  "event": {
+    "header": {
+      "namespace": "Alexa",
+      "name": "DeferredResponse",
+      "messageId": "a unique identifier, preferably a version 4 UUID",
+      "correlationToken": "<an opaque correlation token>",
+      "payloadVersion": "3"
+    },
+    "payload": {
+      "estimatedDeferralInSeconds": 7
+    }
+  }
+}
+        apiObj = ApiClientResponse(body= json.dumps(bod))
         resp.speak("This is a test")
         resp.set_api_response(apiObj)
         return (
