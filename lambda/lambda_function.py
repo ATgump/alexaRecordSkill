@@ -75,16 +75,9 @@ class RecordIntentHandler(AbstractRequestHandler):
         resp["event"]["endpoint"]["endpointId"] = att["context"]["System"]["device"]["deviceiD"]
         serializer = DefaultSerializer
         defResp.set_api_response(serializer.serialize(resp))
-        defResp.response
-        print(defResp)
         #requests.post(respUrl, json.dump(resp))
-        time.sleep(15)
-        return (
-            handler_input.response_builder
-                .set_should_end_session(True)
-                # .ask("add a reprompt if you want to keep the session open for the user to respond")
-                .response
-        )
+        defResp.set_should_end_session(False)
+        return defResp.response
 class StopRecordIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("StopRecordIntent")(handler_input)
