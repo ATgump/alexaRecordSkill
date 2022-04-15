@@ -68,7 +68,7 @@ class RecordIntentHandler(AbstractRequestHandler):
     }
   }
 }
-        apiObj = ApiClientResponse(body= json.dumps(bod))
+        #apiObj = ApiClientResponse(body= json.dumps(bod))
         resp.speak("This is a test")
         resp.set_api_response(apiObj)
         return (
