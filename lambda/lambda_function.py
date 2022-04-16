@@ -54,7 +54,7 @@ class RecordIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         resp = handler_input.response_builder
-        bod = 	{
+        bod = 	dict({
             "event": {
                 "header": {
                     "namespace": "Alexa",
@@ -67,7 +67,7 @@ class RecordIntentHandler(AbstractRequestHandler):
                     "estimatedDeferralInSeconds": 7
                             }
                     }
-                }
+                })
         #apiObj = ApiClientResponse(body= json.dumps(bod))
         resp.speak("This is a test")
         #resp.set_api_response(apiObj)
