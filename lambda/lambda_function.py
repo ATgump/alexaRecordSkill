@@ -36,7 +36,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
         return ask_utils.is_request_type("LaunchRequest")(handler_input)
 
     def handle(self, handler_input):
-      # type: (HandlerInput) -> Response
+        # type: (HandlerInput) -> Response
         speak_output = "Your recorder is open"
         return (
             handler_input.response_builder
