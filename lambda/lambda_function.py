@@ -60,7 +60,7 @@ class RecordIntentHandler(AbstractRequestHandler):
         bod["event"]["payload"] = dict()
         bod["event"]["payload"]["estimatedDeferralInSeconds"] = 7
         
-        apiObj = ApiClientResponse(body= json.dumps(bod))
+        #apiObj = ApiClientResponse(body= json.dumps(bod))
         return (
             handler_input.response_builder
                 .speak("Test")
