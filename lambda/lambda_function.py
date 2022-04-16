@@ -7,10 +7,9 @@
 from email.mime import audio
 from http.client import ResponseNotReady, responses
 import logging
-import uuid
 import ask_sdk_core.utils as ask_utils
 import re
-#from ask_sdk_model_runtime.api_response import ApiResponse
+
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.dispatch_components import AbstractExceptionHandler
@@ -39,37 +38,19 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 # .ask("add a reprompt if you want to keep the session open for the user to respond")
                 .response
         )
-
-class RecordIntentHandler(AbstractRequestHandler):
-    """Handler for Hello World Intent."""
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("RecordIntent")(handler_input)
-
+class TESSIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input: HandlerInput) -> bool:
+        return ask_utils.is_intent_name("TESSIntent")(handler_input)
     def handle(self, handler_input):
-        # type: (HandlerInput) -> Response
-        #speak_output =  "Record"
-        return (
-            handler_input.response_builder
-                .speak("Test")
-                .set_should_end_session(False)
-                # .ask("add a reprompt if you want to keep the session open for the user to respond")
-                .response
-        )
-class StopRecordIntentHandler(AbstractRequestHandler):
-    def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("StopRecordIntent")(handler_input)
-    def handle(self,handler_input):
-        return(
-            handler_input.response_builder
-            .set_should_end_session(True)
-            .response
-        )
+        # type: (HandlerInput) -> Response 
+        return handler_input.response_builder.response
 
-
-
-
-        
+class RADVESSIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input: HandlerInput) -> bool:
+        return ask_utils.is_intent_name("RADVESSIntent")(handler_input)
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response 
+        return handler_input.response_builder.response
 
 # The SkillBuilder object acts as the entry point for your skill, routing all request and response
 # payloads to the handlers above. Make sure any new handlers or interceptors you've
@@ -78,6 +59,6 @@ class StopRecordIntentHandler(AbstractRequestHandler):
 
 sb = SkillBuilder()
 sb.add_request_handler(LaunchRequestHandler())
-sb.add_request_handler(RecordIntentHandler())
-sb.add_request_handler(StopRecordIntentHandler())
+sb.add_request_handler(TESSIntentHandler())
+sb.add_request_handler(RADVESSIntentHandler())
 lambda_handler = sb.lambda_handler()
