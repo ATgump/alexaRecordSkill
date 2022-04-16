@@ -36,6 +36,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
         return ask_utils.is_request_type("LaunchRequest")(handler_input)
 
     def handle(self, handler_input):
+      # type: (HandlerInput) -> Response
         speak_output = "Your recorder is open"
         return (
             handler_input.response_builder
@@ -54,20 +55,6 @@ class RecordIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         resp = handler_input.response_builder
-        bod = 	dict({
-            "event": {
-                "header": {
-                    "namespace": "Alexa",
-                    "name": "DeferredResponse",
-                    "messageId": "a unique identifier, preferably a version 4 UUID",
-                    "correlationToken": "<an opaque correlation token>",
-                    "payloadVersion": "3"
-                    },
-                "payload": {
-                    "estimatedDeferralInSeconds": 7
-                            }
-                    }
-                })
         #apiObj = ApiClientResponse(body= json.dumps(bod))
         resp.speak("This is a test")
         #resp.set_api_response(apiObj)
