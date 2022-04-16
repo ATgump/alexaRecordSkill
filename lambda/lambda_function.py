@@ -63,8 +63,9 @@ class RecordIntentHandler(AbstractRequestHandler):
         apiObj = ApiClientResponse(body= json.dumps(bod))
         return (
             handler_input.response_builder
+                .speak("Test")
                 .set_should_end_session(False)
-                .set_api_response(apiObj)
+                #.set_api_response(apiObj)
                 # .ask("add a reprompt if you want to keep the session open for the user to respond")
                 .response
         )
