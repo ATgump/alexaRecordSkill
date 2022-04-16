@@ -60,7 +60,7 @@ class RecordIntentHandler(AbstractRequestHandler):
         bod["event"]["payload"] = dict()
         bod["event"]["payload"]["estimatedDeferralInSeconds"] = 7
         
-        #apiObj = ApiClientResponse(body= json.dumps(bod))
+        apiObj = ApiClientResponse(body= json.dumps(bod))
         audio_url = create_presigned_url("Media/testSmallSilence.mp3")
         audio_url= re.sub('&','&amp;',audio_url)
         reprompt_output = "<audio src=\""+audio_url+"\"/>"
