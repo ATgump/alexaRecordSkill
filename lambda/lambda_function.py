@@ -10,6 +10,7 @@ import logging
 import uuid
 import ask_sdk_core.utils as ask_utils
 import re
+from ask_sdk_model_runtime.api_client_response import ApiClientResponse
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.dispatch_components import AbstractExceptionHandler
@@ -48,6 +49,18 @@ class RecordIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         #speak_output =  "Record"
+        bod = dict()
+        bod["event"]=dict()
+        bod["event"]["header"]=dict()
+        bod["event"]["header"]["namespace"] = "Alexa"
+        bod["event"]["header"]["name"] = "DeferredResponse"
+        bod["event"]["header"]["messageId"] = str(uuid.uuid4())
+        bod["event"]["header"]["correlationToken"] = "None"
+        bod["event"]["header"]["payloadVersion"] = "3"
+        bod["event"]["payload"] = dict()
+        bod["event"]["payload"]["estimatedDeferralInSeconds"] = 7
+        
+        #apiObj = ApiClientResponse(body= json.dumps(bod))
         audio_url = create_presigned_url("Media/testSmallSilence.mp3")
         audio_url= re.sub('&','&amp;',audio_url)
         reprompt_output = "<audio src=\""+audio_url+"\"/>"
