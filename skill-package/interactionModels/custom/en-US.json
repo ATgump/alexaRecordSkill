@@ -4,19 +4,23 @@
       "invocationName": "microphone",
       "intents": [
         {
-          "name": "RecordIntent",
-          "slots": [],
+          "name": "TESSIntent",
+          "slots": [{
+            "name": "Query",
+            "type": "AMAZON.SearchQuery"
+          }],
           "samples": [
-            "initiate microphone"
+            "say the word {Query}"
           ]
         },
         {
-          "name": "StopRecordIntent",
+          "name": "RADVESSIntent",
           "slots": [],
           "samples": [
-            "terminate microphone"
+            "kids are talking by the door",
+            "dogs are sitting by the door"
           ]
-        },        
+        },      
         {
           "name": "AMAZON.StopIntent",
           "samples": []
