@@ -61,14 +61,10 @@ class RecordIntentHandler(AbstractRequestHandler):
         bod["event"]["payload"]["estimatedDeferralInSeconds"] = 7
         
         apiObj = ApiClientResponse(body= json.dumps(bod))
-        audio_url = create_presigned_url("Media/testSmallSilence.mp3")
-        audio_url= re.sub('&','&amp;',audio_url)
-        reprompt_output = "<audio src=\""+audio_url+"\"/>"
         return (
             handler_input.response_builder
-                .speak(reprompt_output)
                 .set_should_end_session(False)
-                .ask("")
+                .set_api_response(apiObj)
                 # .ask("add a reprompt if you want to keep the session open for the user to respond")
                 .response
         )
