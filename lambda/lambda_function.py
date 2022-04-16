@@ -49,18 +49,6 @@ class RecordIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         #speak_output =  "Record"
-        bod = dict()
-        bod["event"]=dict()
-        bod["event"]["header"]=dict()
-        bod["event"]["header"]["namespace"] = "Alexa"
-        bod["event"]["header"]["name"] = "DeferredResponse"
-        bod["event"]["header"]["messageId"] = str(uuid.uuid4())
-        bod["event"]["header"]["correlationToken"] = "None"
-        bod["event"]["header"]["payloadVersion"] = "3"
-        bod["event"]["payload"] = dict()
-        bod["event"]["payload"]["estimatedDeferralInSeconds"] = 7
-        
-        #apiObj = ApiClientResponse(body= json.dumps(bod))
         audio_url = create_presigned_url("Media/testSmallSilence.mp3")
         audio_url= re.sub('&','&amp;',audio_url)
         reprompt_output = "<audio src=\""+audio_url+"\"/>"
