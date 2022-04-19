@@ -17,11 +17,9 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Your recorder is open"
         return (
             handler_input.response_builder
                 .set_should_end_session(False)
-                .speak(speak_output)
                 .response
         )
 
@@ -31,7 +29,7 @@ class TESSIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("TESSIntent")(handler_input)
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response 
-        return handler_input.response_builder.response
+        return handler_input.response_builder.set_should_end_session(True).response
 
 #Records the RADVESS files
 class RADVESSIntentHandler(AbstractRequestHandler):
@@ -39,7 +37,7 @@ class RADVESSIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("RADVESSIntent")(handler_input)
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response 
-        return handler_input.response_builder.response
+        return handler_input.response_builder.set_should_end_session(True).response
 
 #Add the Skill Intent Handlers to SkillBuilder
 sb = SkillBuilder()
